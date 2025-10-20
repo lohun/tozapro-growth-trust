@@ -9,13 +9,19 @@ import {
   Workflow,
   AlertTriangle,
   ArrowRight,
-  CheckCircle2,
 } from "lucide-react";
+import dataMappingImg from "@/assets/service-data-mapping.jpg";
+import assessmentsImg from "@/assets/service-assessments.jpg";
+import agreementsImg from "@/assets/service-agreements.jpg";
+import policiesImg from "@/assets/service-policies.jpg";
+import automationImg from "@/assets/service-automation.jpg";
+import incidentImg from "@/assets/service-incident.jpg";
 
 const services = [
   {
     id: "data-mapping",
     icon: Database,
+    image: dataMappingImg,
     title: "Data Mapping & Inventory",
     description: "Understand and manage the complete lifecycle of data in your organization.",
     benefits: [
@@ -29,6 +35,7 @@ const services = [
   {
     id: "assessments",
     icon: FileCheck,
+    image: assessmentsImg,
     title: "Impact Assessments",
     description:
       "Professional Privacy Impact Assessments (PIA) and Data Protection Impact Assessments (DPIA).",
@@ -43,6 +50,7 @@ const services = [
   {
     id: "agreements",
     icon: FileText,
+    image: agreementsImg,
     title: "Drafting Agreements",
     description: "Expert negotiation and drafting of data processing and master service agreements.",
     benefits: [
@@ -56,6 +64,7 @@ const services = [
   {
     id: "policies",
     icon: Shield,
+    image: policiesImg,
     title: "Privacy Policies",
     description: "Custom privacy policies and procedures tailored to your business needs.",
     benefits: [
@@ -69,6 +78,7 @@ const services = [
   {
     id: "automation",
     icon: Workflow,
+    image: automationImg,
     title: "Privacy Program Automation",
     description: "Streamline your compliance workflows with integrated automated systems.",
     benefits: [
@@ -82,6 +92,7 @@ const services = [
   {
     id: "incident",
     icon: AlertTriangle,
+    image: incidentImg,
     title: "Incident Response",
     description: "Comprehensive breach preparedness and response planning services.",
     benefits: [
@@ -113,32 +124,35 @@ export default function Services() {
       {/* Services Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid gap-8 max-w-6xl mx-auto">
-            {services.map((service, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {services.map((service) => (
               <Card
                 key={service.id}
                 id={service.id}
-                className="hover:shadow-xl transition-all duration-300"
+                className="overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col"
               >
-                <CardHeader>
-                  <div className="flex items-start gap-4">
-                    <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <service.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-2xl mb-2">{service.title}</CardTitle>
-                      <p className="text-muted-foreground">{service.description}</p>
-                    </div>
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div className="absolute top-4 right-4 h-12 w-12 rounded-lg bg-background/90 backdrop-blur-sm flex items-center justify-center">
+                    <service.icon className="h-6 w-6 text-primary" />
                   </div>
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
+                  <p className="text-muted-foreground text-sm">{service.description}</p>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1">
                   <div className="space-y-4">
-                    <h4 className="font-semibold text-lg">Key Benefits:</h4>
-                    <ul className="grid md:grid-cols-2 gap-3">
+                    <h4 className="font-semibold text-sm">Key Benefits:</h4>
+                    <ul className="space-y-2">
                       {service.benefits.map((benefit, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                          <span className="text-muted-foreground">{benefit}</span>
+                          <div className="h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0 mt-2" />
+                          <span className="text-muted-foreground text-sm">{benefit}</span>
                         </li>
                       ))}
                     </ul>
